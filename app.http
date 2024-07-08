@@ -1,0 +1,27 @@
+###
+GET http://localhost:8000/ok
+
+### AUTHENTICATION TABLE
+### Get all authentication
+GET http://localhost:8000/auth/authentications
+
+### Get authentication by id
+GET http://localhost:8000/auth/authentication/1
+
+### Create authentication
+POST http://localhost:8000/auth/authentication
+Content-Type: application/json
+
+{
+    "auth_id":6,
+    "user_id":5,
+    "password":"mmmkk357"
+}
+
+### Update authentication
+PUT http://localhost:8000/auth/authentication/5
+Content-Type: application/json
+
+{
+    "password":"Pass43"
+}
