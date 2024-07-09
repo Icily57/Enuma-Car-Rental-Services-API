@@ -4,11 +4,11 @@ import * as Tickets from './customerSupportTickets.controller';
 
 const customerSupportTicketsRouter = new Hono();
 
-customerSupportTicketsRouter.get('/',  Tickets.getAllTickets);
-customerSupportTicketsRouter.get('/:id', Tickets.getTicketById);
-customerSupportTicketsRouter.post('/', Tickets.createTicket);
-customerSupportTicketsRouter.put('/:id', Tickets.updateTicket);
-customerSupportTicketsRouter.delete('/:id', Tickets.deleteTicket);
+customerSupportTicketsRouter.get('/tickets',  Tickets.getAllTickets);
+customerSupportTicketsRouter.get('/tickets/:id', Tickets.getTicketById);
+customerSupportTicketsRouter.post('/tickets', Tickets.createTicket);
+customerSupportTicketsRouter.put('/tickets/:id', Tickets.updateTicket);
+customerSupportTicketsRouter.delete('/tickets/:id', Tickets.deleteTicket);
 
 
 export default customerSupportTicketsRouter;

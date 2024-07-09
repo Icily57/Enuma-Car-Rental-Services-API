@@ -1,12 +1,13 @@
 ###
 GET http://localhost:8000/ok
 
+
 ### AUTHENTICATION TABLE
 ### Get all authentication
 GET http://localhost:8000/auth/authentications
 
 ### Get authentication by id
-GET http://localhost:8000/auth/authentication/1
+GET http://localhost:8000/auth/authentication/6
 
 ### Create authentication
 POST http://localhost:8000/auth/authentication
@@ -24,4 +25,277 @@ Content-Type: application/json
 
 {
     "password":"Pass43"
+}
+
+### Delete authentication
+DELETE http://localhost:8000/auth/authentication/6
+
+### BOOKING TABLE
+### Get all booking
+GET http://localhost:8000/auth/bookings
+
+### Get booking by id
+GET http://localhost:8000/auth/booking/6
+
+### Create booking
+POST http://localhost:8000/auth/bookings
+Content-Type: application/json
+
+{
+    "booking_id":6,
+    "user_id":5,
+    "vehicle_id":3,
+    "location_id":2,
+    "booking_date":"2021-07-12",
+    "return_date":"2021-07-15",
+    "total_amount":5000,
+    "booking_status":"pending"
+}
+
+### Update booking
+PUT http://localhost:8000/auth/booking/5
+Content-Type: application/json
+
+{
+    "booking_status":"completed"
+} 
+
+### Delete booking
+DELETE http://localhost:8000/auth/booking/6
+
+### CUSTOMER SUPPORT TICKET TABLE
+### Get all tickets
+GET http://localhost:8000/auth/tickets
+
+### Get ticket by id
+GET http://localhost:8000/auth/ticket/6
+
+### Create ticket
+POST http://localhost:8000/auth/tickets
+Content-Type: application/json
+
+{
+    "ticket_id":6,
+    "user_id":5,
+    "subject":"Booking Issue",
+    "description":"I have a problem with my booking",
+    "status":"pending"
+}
+
+### Update ticket
+PUT http://localhost:8000/auth/ticket/5
+Content-Type: application/json
+
+{
+    "status":"completed"
+}
+
+### Delete ticket
+DELETE http://localhost:8000/auth/ticket/6
+
+
+###FLEET MANAGEMENT TABLE
+###Get all fleets
+GET http://localhost:8000/auth/fleets
+
+###Get fleet by id
+GET http://localhost:8000/auth/fleet/6
+
+###Create fleet
+POST http://localhost:8000/auth/fleets
+Content-Type: application/json
+
+{
+    "fleet_id":6,
+    "vehicle_id":3,
+    "acquisition_date":"2021-07-12",
+    "depreciation_rate":2.5,
+    "current_value":5000,
+    "maintenance_cost":2000,
+    "status":"available"
+}
+
+###Update fleet
+PUT http://localhost:8000/auth/fleet/5
+Content-Type: application/json
+
+{
+    "status":"unavailable"
+}
+
+###Delete fleet
+DELETE http://localhost:8000/auth/fleet/6
+
+###LOCATION AND BRANCH TABLE
+###Get all branches
+GET http://localhost:8000/auth/branches
+
+###Get branch by id
+GET http://localhost:8000/auth/branch/6
+
+###Create branch
+POST http://localhost:8000/auth/branches
+Content-Type: application/json
+
+{
+    "location_id":3,
+    "name":"Kumasi Branch",
+    "address":"Kumasi, Ghana",
+    "contact_phone":"024567890"
+}
+
+###Update branch
+PUT http://localhost:8000/auth/branch/5
+Content-Type: application/json
+
+{
+    "contact_phone":"024567891"
+}
+
+###Delete branch
+DELETE http://localhost:8000/auth/branch/6
+
+###PAYMENTS TABLE
+###Get all payments
+GET http://localhost:8000/auth/payments
+
+###Get payment by id
+GET http://localhost:8000/auth/payment/6
+
+###Create payment
+POST http://localhost:8000/auth/payments
+Content-Type: application/json
+
+{
+    "payment_id":6,
+    "booking_id":3,
+    "payment_date":"2021-07-12",
+    "amount":5000,
+    "status":"pending"
+}
+
+###Update payment
+PUT http://localhost:8000/auth/payment/5
+Content-Type: application/json
+
+{
+    "status":"completed"
+}
+
+###Delete payment
+DELETE http://localhost:8000/auth/payment/6
+
+###VEHICLE TABLE
+###Get all vehicles
+GET http://localhost:8000/auth/vehicles
+
+###Get vehicle by id
+GET http://localhost:8000/auth/vehicle/6
+
+###Create vehicle
+POST http://localhost:8000/auth/vehicles
+Content-Type: application/json
+
+{
+    "vehicle_id":6,
+    "model":"Toyota Corolla",
+    "make":"Toyota",
+    "year":2019,
+    "color":"black",
+    "registration_number":"AS 1234-19",
+    "status":"available"
+}
+
+###Update vehicle
+PUT http://localhost:8000/auth/vehicle/5
+Content-Type: application/json
+
+{
+    "status":"unavailable"
+}
+
+###Delete vehicle
+DELETE http://localhost:8000/auth/vehicle/6
+
+###VEHICLE SPECIFICATION TABLE
+###Get all vehicle specifications
+GET http://localhost:8000/auth/vehicle-specifications
+
+###Get vehicle specification by id
+GET http://localhost:8000/auth/vehicle-specification/6
+
+###Create vehicle specification
+POST http://localhost:8000/auth/vehicle-specifications
+Content-Type: application/json
+
+{
+    "vehicle_id":6,
+    "fuel_type":"petrol",
+    "transmission":"automatic",
+    "seating_capacity":5,
+    "luggage_capacity":3
+}
+
+###Update vehicle specification
+PUT http://localhost:8000/auth/vehicle-specification/5
+Content-Type: application/json
+
+{
+    "luggage_capacity":4
+}
+
+###Delete vehicle specification
+DELETE http://localhost:8000/auth/vehicle-specification/6
+
+
+###USER TABLE
+###Get all users
+GET http://localhost:8000/auth/users
+
+###Get user by id
+GET http://localhost:8000/auth/user/6
+
+###Create user
+POST http://localhost:8000/auth/users
+Content-Type: application/json
+
+{
+    "user_id":6,
+    "username":"Kelpie",
+    "password":"pass245",
+    "role":"user"
+}
+
+###Update user
+PUT http://localhost:8000/auth/user/5
+Content-Type: application/json
+
+{
+    "role":"admin"
+}
+
+###Delete user
+DELETE http://localhost:8000/auth/user/6
+
+
+### AUTHONUSERS TABLE
+###Register a user
+POST http://localhost:8000/auth/register
+Content-Type: application/json
+
+{
+    "user_id":6,
+    "username":"Kelpie",
+    "password":"pass245",
+    "role":"user"                          
+}
+
+
+###Login a user
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+    "username":"Kelpie",
+    "password":"pass245"
 }

@@ -1,11 +1,12 @@
-// import { Hono } from 'hono';
-// import * as usersController from '../controllers/usersController';
+import { Hono } from 'hono';
+import { createUser, deleteUser, getAllUsers, getMoreUsersInfo, getUserById, updateUser } from './Users.controller'
+import { adminRoleAuth } from '../Middleware/bearAuth';
 
-// const usersRouter = new Hono();
+export const userRouter = new Hono();
 
-// usersRouter.post('/', usersController.createUser);
-// usersRouter.get('/:id', usersController.getUserById);
-
-// // Add other routes as needed (updateUser, deleteUser, etc.)
-
-// export default usersRouter;
+userRouter.get('/users', getAllUsers);
+userRouter.get('/users/:id', getUserById);
+userRouter.post('/users', adminRoleAuth, createUser);
+userRouter.put('/users/:id', adminRoleAuth, updateUser);
+userRouter.delete('/users/:id', adminRoleAuth, deleteUser);
+userRouter.get('/usersInfo', getMoreUsersInfo);

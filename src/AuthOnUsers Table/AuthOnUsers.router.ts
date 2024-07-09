@@ -5,14 +5,14 @@ import { loginUser, registerUser } from './AuthOnUsers.controller';
 
 
 
-export const authRouter = new Hono();
+export const authOnUsersRouter = new Hono();
 
-authRouter.post('/register', zValidator('json',registerValidator,(result,c)=>{    
+authOnUsersRouter.post('/register', zValidator('json',registerValidator,(result,c)=>{    
     if(!result.success)
          return c.text( result.error.message + "😒",400)
 }),registerUser);
 
-authRouter.post('/login', zValidator('json',loginValidator,(result,c)=>{    
+authOnUsersRouter.post('/login', zValidator('json',loginValidator,(result,c)=>{    
     if(!result.success) 
         return c.text( result.error.message + "😒",400)
 }),loginUser);

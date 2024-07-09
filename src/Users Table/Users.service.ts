@@ -1,25 +1,50 @@
-// import { pgTable, serial, text, varchar, timestamp, pgEnum } from 'drizzle-orm/pg-core';
-// import  db  from '../drizzle/db';
-// import { SQL, Placeholder } from 'drizzle-orm';
-// import {eq} from 'drizzle-orm';
+import { TInsertUsers, TSelectUsers, usersTable } from "../drizzle/schema";
+import db from "../drizzle/db";
+import { eq } from "drizzle-orm";
 
-// const usersTable = pgTable('users', {
-//   user_id: serial('user_id').primaryKey(),
-//   full_name: text('full_name'),
-//   email: varchar('email', { length: 100 }).unique(),
-//   contact_phone: varchar('contact_phone', { length: 15 }),
-//   address: varchar('address', { length: 100 }),
-//   role: pgEnum('role', ['user', 'admin'])('role').default('user'),
-//   created_at: timestamp('created_at').defaultNow(),
-//   updated_at: timestamp('updated_at').defaultNow(),
-// });
+export const getAllUsersService = async (): Promise<TSelectUsers[] | null> => {
+    return await db.query.usersTable.findMany();
+}
 
-// export const createUser = async (userData: { user_id?: number | SQL<unknown> | Placeholder<string, any> | undefined; full_name?: string | SQL<unknown> | Placeholder<string, any> | null | undefined; email?: string | SQL<unknown> | Placeholder<string, any> | null | undefined; contact_phone?: string | SQL<unknown> | Placeholder<string, any> | null | undefined; address?: string | SQL<unknown> | Placeholder<string, any> | null | undefined; role?: "user" | "admin" | SQL<unknown> | Placeholder<string, any> | null | undefined; created_at?: SQL<unknown> | Date | Placeholder<string, any> | null | undefined; updated_at?: SQL<unknown> | Date | Placeholder<string, any> | null | undefined; }) => {
-//   return await db.insert(usersTable).values(userData).returning();
-// };
+export const createUserService = async (user: TInsertUsers) => {
+    await db.insert(usersTable).values(user);
+    return "User created successfully";
+}
 
-// // export const getUserById = async (userId: string) => {
-// //   return await db.select().from(usersTable).where(usersTable.user_id.eq(userId));
-// // };
+export const getUserByIdService = async (id: TSelectUsers["user_id"]): Promise<TSelectUsers[]> => {
+    return await db.select().from(usersTable).where(eq(usersTable.user_id, id));
+}
 
-// // Add other service functions as needed (updateUser, deleteUser, etc.)
+export const updateUserService = async (id: number, user: TInsertUsers) => {
+    await db.update(usersTable).set(user).where(eq(usersTable.user_id, id));
+    return "User updated successfully 🎉";
+}
+
+export const deleteUserService = async (id: number) => {
+    await db.delete(usersTable).where(eq(usersTable.user_id, id));
+    return "User deleted successfully 🎉";
+}
+
+export const getMoreUsersInfoService = async () => {
+    return await db.query.usersTable.findMany({
+        columns: {
+            full_name: true,
+            contact_phone: true
+        },
+        with: {
+            authOnUsers: {
+                columns: {
+                    id: true
+                },
+                with: {
+                    user: {
+                        columns: {
+                            full_name: true,
+                            email: true
+                        }
+                    }
+                }
+            }
+        }
+    });
+}

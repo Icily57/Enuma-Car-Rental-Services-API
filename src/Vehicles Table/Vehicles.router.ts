@@ -1,11 +1,11 @@
-// import { Hono } from 'hono';
-// import * as vehiclesController from './Vehicles.controller';
+import { Hono } from 'hono';
+import { createVehicle, deleteVehicle, getAllVehicles, getVehicleById, updateVehicle } from './Vehicles.controller';
+import { adminRoleAuth } from '../Middleware/bearAuth';
 
-// const vehiclesRouter = new Hono();
+export const vehicleRouter = new Hono();
 
-// vehiclesRouter.post('/', vehiclesController.createVehicle);
-// vehiclesRouter.get('/:id', vehiclesController.getVehicleById);
-
-// // Add other routes as needed (updateVehicle, deleteVehicle, etc.)
-
-// export default vehiclesRouter;
+vehicleRouter.get('/vehicles', getAllVehicles);
+vehicleRouter.get('/vehicles/:id', getVehicleById);
+vehicleRouter.post('/vehicles', adminRoleAuth, createVehicle);
+vehicleRouter.put('/vehicles/:id', adminRoleAuth, updateVehicle);
+vehicleRouter.delete('/vehicles/:id', adminRoleAuth, deleteVehicle);

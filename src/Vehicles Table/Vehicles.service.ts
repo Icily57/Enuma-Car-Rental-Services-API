@@ -1,22 +1,26 @@
-// import { pgTable, serial, numeric, text, timestamp } from 'drizzle-orm/pg-core';
-// import  db  from '../drizzle/db';
-// import { vehicleSpecificationsTable } from './vehicleSpecificationsService';
+import { TInsertVehicles, TSelectVehicles, vehiclesTable } from "../drizzle/schema";
+import db from "../drizzle/db";
+import { eq } from "drizzle-orm";
 
-// const vehiclesTable = pgTable('vehicles', {
-//   vehicleSpec_id: serial('vehicleSpec_id').primaryKey(),
-//   vehicle_id: serial('vehicle_id').notNull().references(() => vehicleSpecificationsTable.vehicle_id),
-//   rental_rate: numeric('rental_rate'),
-//   availability: text('availability'),
-//   created_at: timestamp('created_at').defaultNow(),
-//   updated_at: timestamp('updated_at').defaultNow(),
-// });
+export const getAllVehiclesService = async (): Promise<TSelectVehicles[] | null> => {
+    return await db.query.vehiclesTable.findMany();
+}
 
-// export const createVehicle = async (vehicleData) => {
-//   return await db.insert(vehiclesTable).values(vehicleData).returning();
-// };
+export const createVehicleService = async (vehicle: TInsertVehicles) => {
+    await db.insert(vehiclesTable).values(vehicle);
+    return "Vehicle created successfully";
+}
 
-// export const getVehicleById = async (vehicleId) => {
-//   return await db.select().from(vehiclesTable).where(vehiclesTable.vehicle_id.eq(vehicleId));
-// };
+export const getVehicleByIdService = async (id: TSelectVehicles["vehicleSpec_id"]): Promise<TSelectVehicles[]> => {
+    return await db.select().from(vehiclesTable).where(eq(vehiclesTable.vehicleSpec_id, id));
+}
 
-// // Add other service functions as needed (updateVehicle, deleteVehicle, etc.)
+export const updateVehicleService = async (id: number, vehicle: TInsertVehicles) => {
+    await db.update(vehiclesTable).set(vehicle).where(eq(vehiclesTable.vehicleSpec_id, id));
+    return "Vehicle updated successfully 🎉";
+}
+
+export const deleteVehicleService = async (id: number) => {
+    await db.delete(vehiclesTable).where(eq(vehiclesTable.vehicleSpec_id, id));
+    return "Vehicle deleted successfully 🎉";
+}
