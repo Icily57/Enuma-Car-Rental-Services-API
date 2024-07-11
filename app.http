@@ -1,301 +1,387 @@
+
+GET http://localhost:8000/api/ok/
+
+
+# ###
+# GET http://localhost:8000/api/
+
 ###
-GET http://localhost:8000/ok
 
+# GET http://localhost:8000/api/users?limit=4
 
-### AUTHENTICATION TABLE
-### Get all authentication
-GET http://localhost:8000/auth/authentications
+###
+GET http://localhost:8000/api/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sInJvbGUiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sImV4cCI6MTcyMDcwODA5Nn0.xdbc_JEwRHun-clP98vh0sjIn03bR75TncNKCK-iaNQ
 
-### Get authentication by id
-GET http://localhost:8000/auth/authentication/6
+###
+GET http://localhost:8000/api/users/1
+###
 
-### Create authentication
-POST http://localhost:8000/auth/authentication
+POST http://localhost:8000/api/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6Ik1pa2kgTW91c2UiLCJlbWFpbCI6Im1pa2lAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IFN3ZWV0IFN0cmVldCIsInJvbGUiOiJ1c2VyIn1dLCJyb2xlIjpbeyJmdWxsX25hbWUiOiJNaWtpIE1vdXNlIiwiZW1haWwiOiJtaWtpQGV4YW1wbGUuY29tIiwiYWRkcmVzcyI6IjQ1NiBTd2VldCBTdHJlZXQiLCJyb2xlIjoidXNlciJ9XSwiZXhwIjoxNzIwNzA3ODgzfQ.mB29CmgnzAKFLGH-GL16Y6MkZS0Rn4h5AIOw82iKnY0
 Content-Type: application/json
 
 {
-    "auth_id":6,
-    "user_id":5,
-    "password":"mmmkk357"
+    "full_name": "Margaret Smith",
+    "email": "maggy@example.com",
+    "contact_phone": "+0909468321",
+    "address": "465 Sweet Street",
+    "role": "user"
 }
 
-### Update authentication
-PUT http://localhost:8000/auth/authentication/5
+###
+PUT http://localhost:8000/api/users/1
+Authorization: 
 Content-Type: application/json
 
 {
-    "password":"Pass43"
+    "full_name": "Jane Smith"
+}
+###
+DELETE http://localhost:8000/api/users/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sInJvbGUiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sImV4cCI6MTcyMDcwODA5Nn0.xdbc_JEwRHun-clP98vh0sjIn03bR75TncNKCK-iaNQ
+
+###
+
+POST http://localhost:8000/api/auth/register
+Content-Type: application/json
+
+{
+    "userId": 3,
+    "password": "hashed_password_3"
 }
 
-### Delete authentication
-DELETE http://localhost:8000/auth/authentication/6
-
-### BOOKING TABLE
-### Get all booking
-GET http://localhost:8000/auth/bookings
-
-### Get booking by id
-GET http://localhost:8000/auth/booking/6
-
-### Create booking
-POST http://localhost:8000/auth/bookings
+###
+POST http://localhost:8000/api/auth/login
 Content-Type: application/json
 
 {
-    "booking_id":6,
-    "user_id":5,
-    "vehicle_id":3,
-    "location_id":2,
-    "booking_date":"2021-07-12",
-    "return_date":"2021-07-15",
-    "total_amount":5000,
-    "booking_status":"pending"
-}
-
-### Update booking
-PUT http://localhost:8000/auth/booking/5
-Content-Type: application/json
-
-{
-    "booking_status":"completed"
-} 
-
-### Delete booking
-DELETE http://localhost:8000/auth/booking/6
-
-### CUSTOMER SUPPORT TICKET TABLE
-### Get all tickets
-GET http://localhost:8000/auth/tickets
-
-### Get ticket by id
-GET http://localhost:8000/auth/ticket/6
-
-### Create ticket
-POST http://localhost:8000/auth/tickets
-Content-Type: application/json
-
-{
-    "ticket_id":6,
-    "user_id":5,
-    "subject":"Booking Issue",
-    "description":"I have a problem with my booking",
-    "status":"pending"
-}
-
-### Update ticket
-PUT http://localhost:8000/auth/ticket/5
-Content-Type: application/json
-
-{
-    "status":"completed"
-}
-
-### Delete ticket
-DELETE http://localhost:8000/auth/ticket/6
-
-
-###FLEET MANAGEMENT TABLE
-###Get all fleets
-GET http://localhost:8000/auth/fleets
-
-###Get fleet by id
-GET http://localhost:8000/auth/fleet/6
-
-###Create fleet
-POST http://localhost:8000/auth/fleets
-Content-Type: application/json
-
-{
-    "fleet_id":6,
-    "vehicle_id":3,
-    "acquisition_date":"2021-07-12",
-    "depreciation_rate":2.5,
-    "current_value":5000,
-    "maintenance_cost":2000,
-    "status":"available"
-}
-
-###Update fleet
-PUT http://localhost:8000/auth/fleet/5
-Content-Type: application/json
-
-{
-    "status":"unavailable"
-}
-
-###Delete fleet
-DELETE http://localhost:8000/auth/fleet/6
-
-###LOCATION AND BRANCH TABLE
-###Get all branches
-GET http://localhost:8000/auth/branches
-
-###Get branch by id
-GET http://localhost:8000/auth/branch/6
-
-###Create branch
-POST http://localhost:8000/auth/branches
-Content-Type: application/json
-
-{
-    "location_id":3,
-    "name":"Kumasi Branch",
-    "address":"Kumasi, Ghana",
-    "contact_phone":"024567890"
-}
-
-###Update branch
-PUT http://localhost:8000/auth/branch/5
-Content-Type: application/json
-
-{
-    "contact_phone":"024567891"
-}
-
-###Delete branch
-DELETE http://localhost:8000/auth/branch/6
-
-###PAYMENTS TABLE
-###Get all payments
-GET http://localhost:8000/auth/payments
-
-###Get payment by id
-GET http://localhost:8000/auth/payment/6
-
-###Create payment
-POST http://localhost:8000/auth/payments
-Content-Type: application/json
-
-{
-    "payment_id":6,
-    "booking_id":3,
-    "payment_date":"2021-07-12",
-    "amount":5000,
-    "status":"pending"
-}
-
-###Update payment
-PUT http://localhost:8000/auth/payment/5
-Content-Type: application/json
-
-{
-    "status":"completed"
-}
-
-###Delete payment
-DELETE http://localhost:8000/auth/payment/6
-
-###VEHICLE TABLE
-###Get all vehicles
-GET http://localhost:8000/auth/vehicles
-
-###Get vehicle by id
-GET http://localhost:8000/auth/vehicle/6
-
-###Create vehicle
-POST http://localhost:8000/auth/vehicles
-Content-Type: application/json
-
-{
-    "vehicle_id":6,
-    "model":"Toyota Corolla",
-    "make":"Toyota",
-    "year":2019,
-    "color":"black",
-    "registration_number":"AS 1234-19",
-    "status":"available"
-}
-
-###Update vehicle
-PUT http://localhost:8000/auth/vehicle/5
-Content-Type: application/json
-
-{
-    "status":"unavailable"
-}
-
-###Delete vehicle
-DELETE http://localhost:8000/auth/vehicle/6
-
-###VEHICLE SPECIFICATION TABLE
-###Get all vehicle specifications
-GET http://localhost:8000/auth/vehicle-specifications
-
-###Get vehicle specification by id
-GET http://localhost:8000/auth/vehicle-specification/6
-
-###Create vehicle specification
-POST http://localhost:8000/auth/vehicle-specifications
-Content-Type: application/json
-
-{
-    "vehicle_id":6,
-    "fuel_type":"petrol",
-    "transmission":"automatic",
-    "seating_capacity":5,
-    "luggage_capacity":3
-}
-
-###Update vehicle specification
-PUT http://localhost:8000/auth/vehicle-specification/5
-Content-Type: application/json
-
-{
-    "luggage_capacity":4
-}
-
-###Delete vehicle specification
-DELETE http://localhost:8000/auth/vehicle-specification/6
-
-
-###USER TABLE
-###Get all users
-GET http://localhost:8000/auth/users
-
-###Get user by id
-GET http://localhost:8000/auth/user/6
-
-###Create user
-POST http://localhost:8000/auth/users
-Content-Type: application/json
-
-{
-    "user_id":6,
-    "username":"Kelpie",
-    "password":"pass245",
-    "role":"user"
-}
-
-###Update user
-PUT http://localhost:8000/auth/user/5
-Content-Type: application/json
-
-{
-    "role":"admin"
-}
-
-###Delete user
-DELETE http://localhost:8000/auth/user/6
-
-
-### AUTHONUSERS TABLE
-###Register a user
-POST http://localhost:8000/auth/register
-Content-Type: application/json
-
-{
-    "user_id":6,
-    "username":"Kelpie",
-    "password":"pass245",
-    "role":"user"                          
+    "userId": 3,
+    "password": "hashed_password_3"
 }
 
 
-###Login a user
-POST http://localhost:8000/auth/login
+###
+GET http://localhost:8000/api/booking
+Authorization: 
+###
+
+POST http://localhost:8000/api/booking
+Authorization: 
 Content-Type: application/json
 
 {
-    "username":"Kelpie",
-    "password":"pass245"
+    "user_id": 2,
+    "vehicle_id": 1,
+    "location_id": 1,
+    "total_amount": 80.97,
+    "booking_status": "cancelled"
 }
+
+###
+PUT http://localhost:8000/api/booking/2
+Authorization:
+Content-Type: application/json
+
+{
+    "booking_status": "completed"
+}
+
+GET http://localhost:8000/api/booking/2
+Authorization: 
+
+###
+DELETE http://localhost:8000/api/booking/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sInJvbGUiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sImV4cCI6MTcyMDcwODA5Nn0.xdbc_JEwRHun-clP98vh0sjIn03bR75TncNKCK-iaNQ
+
+
+###
+
+GET http://localhost:8000/api/payment
+Authorization: 
+
+###
+POST http://localhost:8000/api/payment
+Authorization: 
+Content-Type: application/json
+
+{
+     "booking_id": 2,
+    "amount": 80.97,
+    "payment_status": "Cancelled",
+    "payment_method": "Paypal",
+    "transaction_id": "txn_1234657890"
+}
+
+###
+
+PUT http://localhost:8000/api/payment/2
+Authorization: 
+Content-Type: application/json
+
+{
+     "amount": 90
+}
+###
+
+
+
+GET http://localhost:8000/api/payment/2
+Authorization: 
+
+###
+DELETE http://localhost:8000/api/payment/2
+
+###
+GET http://localhost:8000/api/customerSupportTickets
+
+###
+GET http://localhost:8000/api/customerSupportTickets/2
+
+###
+POST http://localhost:8000/api/customerSupportTickets
+Content-Type: application/json
+
+{
+
+    "user_id": 2,
+    "subject": "Payment Issue",
+    "description": "I made a payment but it was not processed. Please help me with this issue.",
+    "status": "open"
+}
+
+###
+
+PUT http://localhost:8000/api/customerSupportTickets/1
+Content-Type: application/json
+
+{
+    "status": "in progress"
+}
+###
+DELETE http://localhost:8000/api/customerSupportTickets/2
+
+###
+
+
+GET http://localhost:8000/api/locationBranch
+
+###
+GET http://localhost:8000/api/locationBranch/1
+
+###
+
+POST http://localhost:8000/api/locationBranch
+Content-Type: application/json
+
+{
+     "name": "Main Branch",
+    "address": "123 Main St",
+    "contact_phone": "+1112223333"
+}
+
+###
+
+PUT http://localhost:8000/api/locationBranch/6
+Content-Type: application/json
+
+{
+    "name": "Bistro"
+}
+###
+DELETE http://localhost:8000/api/locationBranch/6
+
+###
+
+GET http://localhost:8000/api/fleet
+
+###
+
+POST http://localhost:8000/api/fleet
+Content-Type: application/json
+
+{
+    "vehicle_id": 3,
+    "depreciation_rate": 0.50,
+    "current_value": 79000.00,
+    "maintenance_cost": 900.00,
+    "status": "active"
+}
+
+###
+
+
+GET http://localhost:8000/api/fleet/2
+###
+
+# GET http://localhost:8000/api/filterFleetInfo/1
+###
+
+GET http://localhost:8000/api/fleetInfo
+###
+
+
+PUT http://localhost:8000/api/fleet/3
+Content-Type: application/json
+
+{
+    "depreciation_rate": 0.12
+}
+###
+DELETE http://localhost:8000/api/fleet/3
+
+
+###
+
+GET http://localhost:8000/api/vehicle
+
+###
+GET http://localhost:8000/api/vehicle/1
+
+###
+
+POST http://localhost:8000/api/vehicle
+Content-Type: application/json
+
+{
+      "rental_rate": 99.99,
+    "availability": true
+}
+
+###
+
+PUT http://localhost:8000/api/vehicle/6
+Content-Type: application/json
+
+{
+    "availability": false
+}
+###
+
+GET http://localhost:8000/api/vehicle/6
+
+###
+DELETE http://localhost:8000/api/vehicle/6
+
+###
+
+GET http://localhost:8000/api/vehicleSpecs
+
+###
+
+POST http://localhost:8000/api/vehicleSpecs
+Content-Type: application/json
+
+{
+    "vehicle_id": 5,
+    "manufacturer": "Toyota",
+    "model": "Camry",
+    "year": 2022,
+    "fuel_type": "Petrol",
+    "engine_capacity": "2.5L",
+    "transmission": "Automatic",
+    "seating_capacity": 5,
+    "color": "Red",
+    "features": "Air Conditioning, Power Steering, Bluetooth, Cruise Control"
+}
+
+###
+
+PUT http://localhost:8000/api/vehicleSpecs/6
+Content-Type: application/json
+
+{
+    "fuel_type": "diesel"
+}
+###
+
+GET http://localhost:8000/api/vehicleSpecs/6
+
+###
+DELETE http://localhost:8000/api/vehicleSpecs/6
+
+###
+
+GET http://localhost:8000/api/payment
+
+###
+
+POST http://localhost:8000/api/payment
+Content-Type: application/json
+
+{
+      "booking_id": 1,
+    "amount": 150.75,
+    "payment_status": "Completed",
+    "payment_method": "Credit Card",
+    "transaction_id": "txn_01ABC23DEFG45H"
+}
+
+###
+
+PUT http://localhost:8000/api/payment/2
+Content-Type: application/json
+
+{
+    "amount": 160.75
+}
+###
+
+GET http://localhost:8000/api/payment/2
+
+###
+DELETE http://localhost:8000/api/payment/2
+
+###
+
+
+GET http://localhost:8000/api/locationBranch
+
+###
+
+POST http://localhost:8000/api/locationBranch
+Content-Type: application/json
+
+{
+     "name": "John Doe",
+    "address": "123 Main St, Springfield, IL",
+    "contact_phone": "+1-555-123-4567"
+}
+
+###
+
+PUT http://localhost:8000/api/locationBranch/2
+Content-Type: application/json
+
+{
+    "name": "Guga"
+}
+
+###
+
+GET http://localhost:8000/api/locationBranch/2
+
+###
+DELETE http://localhost:8000/api/locationBranch/2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

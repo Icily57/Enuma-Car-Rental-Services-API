@@ -11,7 +11,10 @@
 # deps
 node_modules/
 
-
+# env
+.env
+.env.production
+dist
 
 # logs
 logs/
@@ -24,6 +27,3 @@ lerna-debug.log*
 
 # misc
 .DS_Store
-
-notes
-dist
