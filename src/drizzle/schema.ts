@@ -1,10 +1,11 @@
 import {pgTable,serial, text, varchar, integer, timestamp, boolean, decimal } from "drizzle-orm/pg-core";
 import { relations } from 'drizzle-orm'
 
-export const UsersTable = pgTable("user", {
+export const UsersTable = pgTable("UsersTable", {
     id: serial('id').primaryKey(),
     full_name: varchar('full_name', {length: 100}).notNull(),
     email: varchar("email", {length: 100}).unique().notNull(),
+    password: varchar('password', { length: 255}).notNull(),
     contact_phone: varchar('contact_phone', {length: 20}),
     address: varchar('address', {length: 255}),
     role: varchar('role', {length: 20}).default('user'),
@@ -12,13 +13,13 @@ export const UsersTable = pgTable("user", {
     updated_at: timestamp('updated_at').defaultNow(), 
 })
 
-export const AuthTable = pgTable("auth", {
-    id: serial('id').primaryKey(),
-    user_id: integer('user_id').notNull().references(() => UsersTable.id, { onDelete: "cascade" }),
-    password: varchar('password', { length: 255}).notNull(),
-    created_at: timestamp('created_at').defaultNow(),
-    updated_at: timestamp('updated_at').defaultNow(), 
-})
+// export const AuthTable = pgTable("auth", {
+//     id: serial('id').primaryKey(),
+//     user_id: integer('user_id').notNull().references(() => UsersTable.id, { onDelete: "cascade" }),
+//     password: varchar('password', { length: 255}).notNull(),
+//     created_at: timestamp('created_at').defaultNow(),
+//     updated_at: timestamp('updated_at').defaultNow(), 
+// })
 
 export const VehiclesTable = pgTable("vehicles", {
     id: serial('id').primaryKey(),
@@ -118,19 +119,19 @@ export const  FleetTable = pgTable("fleet", {
 // });
 
 
-//Relations
+// Relations
 export const userRelations = relations(UsersTable, ({ one,many }) => ({
-    auth: one(AuthTable, {
-        fields: [UsersTable.id],
-        references: [AuthTable.user_id]
-    }),
+    // auth: one(AuthTable, {
+    //     fields: [UsersTable.id],
+    //     references: [AuthTable.user_id]
+    // }),
     booking: many(BookingsTable),
     customerSupportTicket: many(CustomerSupportTicketsTable)
     
 }))
-export const authRelations = relations(AuthTable, ({ many }) => ({
-    user: many(UsersTable)
-}))
+// export const authRelations = relations(AuthTable, ({ many }) => ({
+//     user: many(UsersTable)
+// }))
 
 export const vehiclesRelations = relations(VehiclesTable, ({ one,many }) => ({
     vehicleSpec: one(VehicleSpecificationsTable, {
@@ -202,8 +203,8 @@ export const locationBranchRelations = relations(LocationBranchTable, ({ one,man
 export type TIUser = typeof UsersTable.$inferInsert;
 export type TSUser = typeof UsersTable.$inferSelect;
 
-export type TIAuthOnUser = typeof AuthTable.$inferInsert;
-export type TSAuthOnUser = typeof AuthTable.$inferSelect;
+// export type TIAuthOnUser = typeof AuthTable.$inferInsert;
+// export type TSAuthOnUser = typeof AuthTable.$inferSelect;
 
 export type TIVehicle = typeof VehiclesTable.$inferInsert;
 export type TSVehicle = typeof VehiclesTable.$inferSelect;

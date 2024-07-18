@@ -39,7 +39,7 @@ export const getMoreUsersInfoService = async () => {
             contact_phone: true
         },
         with: {
-            auth: {
+            booking: {
                 columns: {
                   id: true
                 },

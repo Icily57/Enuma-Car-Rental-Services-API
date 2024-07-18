@@ -7,7 +7,7 @@ import { adminRoleAuth, userRoleAuth,bothRoleAuth} from '../Middleware/bearAuth'
 export const userRouter = new Hono();
 
 //get all users      api/users
-userRouter.get("/users",adminRoleAuth, listUsers);
+userRouter.get("/users", listUsers);
 //get a single user    api/users/1
 userRouter.get("/users/:id",adminRoleAuth,getUser)
 // create a user 

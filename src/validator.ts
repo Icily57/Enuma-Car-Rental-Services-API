@@ -64,11 +64,15 @@ export const fleetSchema = z.object({
 })
 
 export const loginUserSchema = z.object({
-    userId: z.number(),
+    email: z.string(),
     password: z.string()
 })
 
 export const registerUserSchema = z.object({
-    userId: z.number(),
+    full_name: z.string(),
+    email: z.string(),
+    contact_phone: z.string(),
+    address: z.string(),
+    role: z.string(),
     password: z.string()
 })

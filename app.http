@@ -11,7 +11,7 @@ GET http://localhost:8000/api/ok/
 
 ###
 GET http://localhost:8000/api/users
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sInJvbGUiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sImV4cCI6MTcyMDcwODA5Nn0.xdbc_JEwRHun-clP98vh0sjIn03bR75TncNKCK-iaNQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sInJvbGUiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sImV4cCI6MTcyMDczNDA2M30.lSxikb-PMiUOHQNcMrACvX5IpUdCtBUj1OgrWA_nNTo
 
 ###
 GET http://localhost:8000/api/users/1
@@ -47,8 +47,12 @@ POST http://localhost:8000/api/auth/register
 Content-Type: application/json
 
 {
-    "userId": 3,
-    "password": "hashed_password_3"
+    "email":"mikikim@gmail.com",
+    "full_name":"Miki Kim",
+    "contact_phone":"+1234347350",
+    "address":"246 Sweet St",
+    "role":"user",
+    "password": "67890"
 }
 
 ###
@@ -56,14 +60,14 @@ POST http://localhost:8000/api/auth/login
 Content-Type: application/json
 
 {
-    "userId": 3,
-    "password": "hashed_password_3"
+    "email":"icilyweird@gmail.com",
+    "password": "12345"
 }
 
 
 ###
 GET http://localhost:8000/api/booking
-Authorization: 
+ 
 ###
 
 POST http://localhost:8000/api/booking
@@ -71,12 +75,16 @@ Authorization:
 Content-Type: application/json
 
 {
-    "user_id": 2,
-    "vehicle_id": 1,
-    "location_id": 1,
-    "total_amount": 80.97,
-    "booking_status": "cancelled"
+    "user_id": 1,
+    "vehicle_id": 2,
+    "location_id": 2,
+    "total_amount": 1500.00,
+    "booking_status": "approved"
 }
+
+
+###
+POST http://localhost:8000/api/bookings
 
 ###
 PUT http://localhost:8000/api/booking/2
@@ -106,12 +114,14 @@ Authorization:
 Content-Type: application/json
 
 {
-     "booking_id": 2,
-    "amount": 80.97,
-    "payment_status": "Cancelled",
-    "payment_method": "Paypal",
-    "transaction_id": "txn_1234657890"
+     "booking_id": 3,
+    "amount": 150.00,
+    "payment_status": "pending",
+    "payment_method": "Mobile Money",
+    "transaction_id": "txn_157665564"
 }
+
+
 
 ###
 

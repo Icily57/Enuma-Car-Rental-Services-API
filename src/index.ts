@@ -18,6 +18,7 @@ import { vehicleRouter } from './vehicles/vehicles.router'
 import { vehicleSpecRouter } from './vehicle Specifications/vehicleSpec.router'
 import { paymentRouter } from './payments/payment.router'
 import { locationBranchRouter } from './location and Branches/locationBranches.router'
+import {cors} from 'hono/cors'
 
 const app = new Hono().basePath('/api')
 
@@ -30,6 +31,7 @@ const { printMetrics, registerMetrics } = prometheus()
 
 app.use('*', registerMetrics)
 app.get('/metrics', printMetrics)
+app.use(cors())
   
 app.use(logger()) 
 app.use(csrf()) //prevents CSRF attacks by checking request headers.
