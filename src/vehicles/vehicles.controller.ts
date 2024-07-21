@@ -1,17 +1,13 @@
 import { Context } from "hono";
-import { vehicleService, getVehicleService, createVehicleService, updateVehicleService, deleteVehicleService } from "./vehicles.service";
+import { vehicleService, getVehicleService, createVehicleService, updateVehicleService, deleteVehicleService, getMoreVehicleInfoService, getVehicleInfoService, } from "./vehicles.service";
 
 export const listVehicles = async (c: Context) => {
     try {
-        //limit the number of Vehicles to be returned
-
-        const limit = Number(c.req.query('limit'))
-
-        const data = await vehicleService(limit);
-        if (data == null || data.length == 0) {
-            return c.text("Vehicle not found", 404)
+        const vehicle = await vehicleService();
+        if (!vehicle) {
+            return c.json({msg:"Vehicle not found"}, 404)
         }
-        return c.json(data, 200);
+        return c.json(vehicle, 200);
     } catch (error: any) {
         return c.json({ error: error?.message }, 400)
     }
@@ -89,3 +85,24 @@ export const deleteVehicle = async (c: Context) => {
 //     }
 //     return c.json(VehicleInfo, 200);
 // }
+
+//get all vehicles with thier specs
+export const getMoreVehicleInfo = async(c:Context) => {
+    const VehicleInfo = await getMoreVehicleInfoService();
+    if (VehicleInfo == undefined) {
+        return c.text("Specs not found", 404);
+    }
+    return c.json(VehicleInfo, 200);
+}
+
+//get one vehicle with its specs as an object
+export const getVehicleInfo = async(c:Context) => {
+    const id = parseInt(c.req.param("id"));
+    if (isNaN(id)) return c.text("Invalid ID", 400);
+
+    const VehicleInfo = await getVehicleInfoService(id);
+    if (VehicleInfo == undefined) {
+        return c.text("Specs not found", 404);
+    }
+    return c.json(VehicleInfo, 200);
+}

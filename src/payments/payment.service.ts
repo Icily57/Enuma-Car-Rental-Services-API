@@ -2,14 +2,8 @@ import { eq } from "drizzle-orm";
 import db from "../drizzle/db";
 import { TIPayment, TSPayment, PaymentsTable } from "../drizzle/schema";
 
-export const paymentService = async (
-  limit?: number
-): Promise<TSPayment[] | null> => {
-  if (limit) {
-    return await db.query.PaymentsTable.findMany({
-      limit: limit,
-    });
-  }
+export const paymentService = async (): Promise<TSPayment[] | null> => {
+ 
   return await db.query.PaymentsTable.findMany();
 };
 

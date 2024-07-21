@@ -1,15 +1,18 @@
 import { Context } from "hono";
 import { paymentService, getPaymentService, createPaymentService, updatePaymentService, deletePaymentService, getMorePaymentInfoService } from "./payment.service";
+import dotenv from "dotenv";
+import Stripe from "stripe";
+dotenv.config();
+import {CLIENT_URL} from "../utils";
+
+const  stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {apiVersion: '2024-06-20'});
 
 export const listPayment = async (c: Context) => {
     try {
-        //limit the number of payment to be returned
-
-        const limit = Number(c.req.query('limit'))
-
-        const data = await paymentService(limit);
-        if (data == null || data.length == 0) {
-            return c.text("payment not found", 404)
+     
+        const data = await paymentService();
+        if (data == null ) {
+            return c.json({msg:"No payments found"}, 404)
         }
         return c.json(data, 200);
     } catch (error: any) {
@@ -93,4 +96,56 @@ export const getMorePaymentInfo = async(c:Context) => {
         return c.text("paymentInfo not found", 404);
     }
     return c.json(paymentInfo, 200);
+}
+
+export const checkoutPayment = async(c:Context) => {
+    let booking;
+    try{
+        booking = await c.req.json();
+    }catch(error){
+        return c.json("Invalid request body", 400)
+    }
+    try {
+        if(!booking.id || !booking.total_amount){
+            return c.json("Missing ID or Total Amount", 400)
+        }
+
+        const convervionRate = 0.007;
+        const totalAmountInUSD = booking.total_amount * convervionRate;
+        const line_items : Stripe.Checkout.SessionCreateParams.LineItem[]= [{
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: `Booking ID: ${booking.id}`,
+                    },
+                    unit_amount: Math.round(totalAmountInUSD * 100),
+                },
+                quantity: 1,
+            }];
+            const session = await stripe.checkout.sessions.create({
+                payment_method_types: ['card'],
+                line_items,
+                mode: 'payment',
+                success_url: `${CLIENT_URL}/dashboard`,
+                cancel_url: `${CLIENT_URL}/dashboard`,
+            });
+
+            const paymentDetails = {
+                booking_id: booking.id,
+                user_id: booking.user_id,
+                amount: totalAmountInUSD,
+                payment_method: 'card',
+                transaction_id: session.id,
+            }
+            const createdPayment = await createPaymentService({
+              ...paymentDetails,
+              amount: totalAmountInUSD.toString(),
+            });
+
+            return c.json({id: session.id , createdPayment}, 200);
+        
+    } catch (error: any) {
+        return c.json({ error: error?.message }, 400)   
+        
+    }   
 }

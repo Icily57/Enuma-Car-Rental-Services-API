@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { CustomerSupportTicketService, getCustomerSupportTicketService, createCustomerSupportTicketService, updateCustomerSupportTicketService, deleteCustomerSupportTicketService, getMoreCustomerSupportTicketInfoService} from "./customerSupportTickets.service";
+import { CustomerSupportTicketService, getCustomerSupportTicketService, createCustomerSupportTicketService, updateCustomerSupportTicketService, deleteCustomerSupportTicketService, getMoreCustomerSupportTicketInfoService, getUserTicketsByUserIdService} from "./customerSupportTickets.service";
 
 export const listCustomerSupportTicket = async (c: Context) => {
     try {
@@ -88,4 +88,16 @@ export const getMoreCustomerSupportTicketInfo = async(c:Context) => {
         return c.text("CustomerSupportTicket  not found", 404);
     }
     return c.json(CustomerSupportTicketInfo, 200);
+}
+
+// get all tickets for one user using id
+export const getUserTicketsByUserId = async (c: Context) => {
+    const id = parseInt(c.req.param("id"));
+    if (isNaN(id)) return c.text("Invalid ID", 400);
+
+    const tickets = await getUserTicketsByUserIdService(id);
+    if (tickets == undefined) {
+        return c.text("Tickets not found", 404);
+    }
+    return c.json(tickets, 200);
 }

@@ -7,12 +7,7 @@ import {
 } from "../drizzle/schema";
 
 export const VehicleSpecificationsService = async (limit?: number): Promise<TSVehicleSpec[] | null> => {
-  if (limit) {
-    return await db.query.VehicleSpecificationsTable.findMany({
-      limit: limit,
-    });
-  }
-  return await db.query.VehicleSpecificationsTable.findMany();
+   return await db.query.VehicleSpecificationsTable.findMany();
 };
 
 export const getVehicleSpecificationsService = async (
@@ -38,23 +33,23 @@ export const deleteVehicleSpecificationsService = async (id: number) => {
   return "VehicleSpec deleted successfully";
 };
 
-export const getMoreVehicleSpecificationsInfoService = async (id: number) => {
-  return await db.query.VehicleSpecificationsTable.findMany({
-    columns: {
-     id: false,
-    },
-    with: {
-      vehicles: {
-        columns: 
-        {
-          availability:true,
-          rental_rate: true,
-          updated_at:true
+// export const getMoreVehicleSpecificationsInfoService = async (id: number) => {
+//   return await db.query.VehicleSpecificationsTable.findMany({
+//     columns: {
+//      id: false,
+//     },
+//     with: {
+//       vehicles: {
+//         columns: 
+//         {
+//           availability:true,
+//           rental_rate: true,
+//           updated_at:true
 
-        }
-      }
-    },
-  });
+//         }
+//       }
+//     },
+//   });
 
 
-}
+// }

@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { listPayment, getPayment, createPayment, updatePayment, deletePayment, getMorePaymentInfo} from "./payment.controller"
+import { listPayment, getPayment, createPayment, updatePayment, deletePayment, getMorePaymentInfo, checkoutPayment} from "./payment.controller"
 import { zValidator } from "@hono/zod-validator";
 import { paymentsSchema } from "../validator";
 import { adminRoleAuth,bothRoleAuth } from '../Middleware/bearAuth'
@@ -10,11 +10,7 @@ paymentRouter.get("/payment", listPayment);
 //get a single Payment    api/payment/1
 paymentRouter.get("/payment/:id", getPayment)
 // create a Payment 
-paymentRouter.post("/payment", zValidator('json', paymentsSchema, (result, c) => {
-    if (!result.success) {
-        return c.json(result.error, 400)
-    }
-}), createPayment)
+paymentRouter.post("/payment", createPayment)
 //update a Payment
 paymentRouter.put("/payment/:id", updatePayment)
 
@@ -22,4 +18,5 @@ paymentRouter.delete("/payment/:id",deletePayment)
 // PaymentRouter.get("/activepayments",userOrAdminRoleAuth, listActivepayments)
 paymentRouter.get("/PaymentInfo", getMorePaymentInfo)
 
-//https:domai.com/api/payment?limit=10
+//checkoutpayment
+paymentRouter.post("/checkout-session",checkoutPayment)

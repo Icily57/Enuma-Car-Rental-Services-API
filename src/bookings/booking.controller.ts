@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { bookingService, getBookingService, createBookingService, updateBookingService, deleteBookingService, getMoreBookingInfoService } from "./booking.service";
+import { bookingService, getBookingService, createBookingService, updateBookingService, deleteBookingService, getMoreBookingInfoService, getUserBookingsService } from "./booking.service";
 import { TIBooking, TSBooking } from "../drizzle/schema";
 
 export const listBooking = async (c: Context) => {
@@ -59,7 +59,7 @@ export const deleteBooking = async (c: Context) => {
 
     try {
         const booking = await getBookingService(id);
-        if (booking == undefined) return c.text("Booking not found", 404);
+        if (!booking) return c.text("Booking not found", 404);
         const res = await deleteBookingService(id);
         if (!res) return c.text("Booking not deleted", 404);
         return c.json({ msg: res }, 201);
@@ -70,8 +70,23 @@ export const deleteBooking = async (c: Context) => {
 
 export const getMoreBookingInfo = async (c: Context) => {
     const bookingsInfo = await getMoreBookingInfoService();
-    if (bookingsInfo == undefined) {
+    if (!bookingsInfo) {
         return c.text("Bookings info not found", 404);
     }
     return c.json(bookingsInfo, 200);
+}
+
+export const getAllBookingsByUserId = async (c: Context) => {
+   const user_id = parseInt(c.req.param("user_id"));
+    try {
+        if (isNaN(user_id)) return c.json({msg:"Invalid ID"}, 400);
+        const booking = await getUserBookingsService(user_id);
+        if (booking === null) {
+            return c.json({msg:"Booking not found"}, 404);
+        }
+        return c.json(booking, 200);
+    } catch (error: any) {
+        return c.json({ error: error?.message }, 400);
+        
+    }
 }

@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { listCustomerSupportTicket, getCustomerSupportTicket , createCustomerSupportTicket , updateCustomerSupportTicket , deleteCustomerSupportTicket , getMoreCustomerSupportTicketInfo } from "./customerSupportTickets.controller"
+import { listCustomerSupportTicket, getCustomerSupportTicket , createCustomerSupportTicket , updateCustomerSupportTicket , deleteCustomerSupportTicket , getMoreCustomerSupportTicketInfo, getUserTicketsByUserId } from "./customerSupportTickets.controller"
 import { zValidator } from "@hono/zod-validator";
 import { customerSupportTicketSchema } from "../validator";
 import { adminRoleAuth } from '../Middleware/bearAuth'
@@ -20,4 +20,6 @@ customerSupportTicketRouter.put("/customerSupportTickets/:id",updateCustomerSupp
 
 customerSupportTicketRouter.delete("/customerSupportTickets/:id", deleteCustomerSupportTicket )
 customerSupportTicketRouter.get("/customerSupportTicketsInfo/:id", getMoreCustomerSupportTicketInfo)
+// get all tickets for one user using id
+customerSupportTicketRouter.get("/tickets-by-user/:id", getUserTicketsByUserId)
 

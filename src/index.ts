@@ -20,7 +20,7 @@ import { paymentRouter } from './payments/payment.router'
 import { locationBranchRouter } from './location and Branches/locationBranches.router'
 import {cors} from 'hono/cors'
 
-const app = new Hono().basePath('/api')
+const app = new Hono()
 
 const customTimeoutException = () =>
   new HTTPException(408, {

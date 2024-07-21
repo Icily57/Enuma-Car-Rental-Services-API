@@ -11,18 +11,19 @@ export const userSchema = z.object({
 
 export const vehicleSchema = z.object({
     rental_rate: z.number().multipleOf(0.01),
+    vehicleSpec_id: z.number(),
     availability: z.boolean()
 })
 
 export const vehicleSpecSchema = z.object({
-    vehicle_id: z.number(),
+    
     manufacturer: z.string(),
     model: z.string(),
-    year: z.number(),
+    year: z.string(),
     fuel_type: z.string(),
     engine_capacity: z.string(),
     transmission: z.string(),
-    seating_capacity: z.number(), 
+    seating_capacity: z.string(), 
     color: z.string(),
     features: z.string(),
 })
@@ -30,9 +31,11 @@ export const vehicleSpecSchema = z.object({
 export const bookingSchema = z.object({
     user_id: z.number(),
     vehicle_id: z.number(),
-    location_id: z.number(),
-    total_amount: z.number().multipleOf(0.01),
-    booking_status: z.string()
+    location_name: z.string(),
+    booking_date: z.string(),
+    return_date: z.string(),
+    total_amount: z.number()
+    
 })
 
 export const paymentsSchema = z.object({

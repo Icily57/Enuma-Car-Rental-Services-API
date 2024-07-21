@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { listVehicleSpecifications, getVehicleSpecifications, createVehicleSpecifications, updateVehicleSpecifications, deleteVehicleSpecifications, getMoreVehicleSpecificationsInfo } from "./vehicleSpec.controller"
+import { listVehicleSpecifications, getVehicleSpecifications, createVehicleSpecifications, updateVehicleSpecifications, deleteVehicleSpecifications, } from "./vehicleSpec.controller"
 import { zValidator } from "@hono/zod-validator";
 import { vehicleSpecSchema } from "../validator";
 import { adminRoleAuth } from "../Middleware/bearAuth";
@@ -10,13 +10,9 @@ vehicleSpecRouter.get("/vehicleSpecs", listVehicleSpecifications);
 //get a single vehicleSpec    api/vehicleSpec/1
 vehicleSpecRouter.get("/vehicleSpecs/:id", getVehicleSpecifications)
 // create a vehicleSpec 
-vehicleSpecRouter.post("/vehicleSpecs", zValidator('json', vehicleSpecSchema, (result, c) => {
-    if (!result.success) {
-        return c.json(result.error, 400)
-    }
-}), createVehicleSpecifications)
+vehicleSpecRouter.post("/vehicleSpecs", createVehicleSpecifications)
 //update a vehicleSpec
 vehicleSpecRouter.put("/vehicleSpecs/:id", updateVehicleSpecifications)
 
 vehicleSpecRouter.delete("/vehicleSpecs/:id",deleteVehicleSpecifications)
-vehicleSpecRouter.get("/vehicleSpecsInfo/:id", getMoreVehicleSpecificationsInfo)
+// vehicleSpecRouter.get("/vehicleSpecsInfo/:id", getMoreVehicleSpecificationsInfo)

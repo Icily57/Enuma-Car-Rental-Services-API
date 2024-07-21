@@ -1,17 +1,13 @@
 import { Context } from "hono";
-import { VehicleSpecificationsService, getVehicleSpecificationsService, createVehicleSpecificationsService, updateVehicleSpecificationsService, deleteVehicleSpecificationsService, getMoreVehicleSpecificationsInfoService} from "./vehicleSpec.service";
+import { VehicleSpecificationsService, getVehicleSpecificationsService, createVehicleSpecificationsService, updateVehicleSpecificationsService, deleteVehicleSpecificationsService} from "./vehicleSpec.service";
 
 export const listVehicleSpecifications = async (c: Context) => {
     try {
-        //limit the number of VehicleSpecificationss to be returned
-
-        const limit = Number(c.req.query('limit'))
-
-        const data = await VehicleSpecificationsService(limit);
-        if (data == null || data.length == 0) {
-            return c.text("VehicleSpecifications not found", 404)
+        const Specifications = await VehicleSpecificationsService();
+        if (!Specifications) {
+            return c.text("Vehicle Specifications not found", 404)
         }
-        return c.json(data, 200);
+        return c.json(Specifications, 200);
     } catch (error: any) {
         return c.json({ error: error?.message }, 400)
     }
@@ -79,13 +75,13 @@ export const deleteVehicleSpecifications = async (c: Context) => {
     }
 }
 
-export const getMoreVehicleSpecificationsInfo = async(c:Context) => {
-    const id = parseInt(c.req.param("id"));
-    if (isNaN(id)) return c.text("Invalid ID", 400);
+// export const getMoreVehicleSpecificationsInfo = async(c:Context) => {
+//     const id = parseInt(c.req.param("id"));
+//     if (isNaN(id)) return c.text("Invalid ID", 400);
 
-    const VehicleSpecificationsInfo = await getMoreVehicleSpecificationsInfoService(id);
-    if (VehicleSpecificationsInfo == undefined) {
-        return c.text("VehicleSpecifications not found", 404);
-    }
-    return c.json(VehicleSpecificationsInfo, 200);
-}
+//     const VehicleSpecificationsInfo = await getMoreVehicleSpecificationsInfoService(id);
+//     if (VehicleSpecificationsInfo == undefined) {
+//         return c.text("VehicleSpecifications not found", 404);
+//     }
+//     return c.json(VehicleSpecificationsInfo, 200);
+// }

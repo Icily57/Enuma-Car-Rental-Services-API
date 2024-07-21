@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { listBooking, getBookings, createBooking, updateBooking, deleteBooking } from "./booking.controller"
+import { listBooking, getBookings, createBooking, updateBooking, deleteBooking, getAllBookingsByUserId,  } from "./booking.controller"
 import { zValidator } from "@hono/zod-validator";
 import { bookingSchema } from "../validator";
 // import { adminRoleAuth, bothRoleAuth, userRoleAuth } from '../Middleware/bearAuth';
@@ -7,6 +7,7 @@ import { bookingSchema } from "../validator";
 export const bookingRouter = new Hono();
 
 bookingRouter.get("/booking", listBooking);
+bookingRouter.get("/bookings-by-user/:user_id", getAllBookingsByUserId);
 bookingRouter.get("/booking/:id", getBookings);
 
 bookingRouter.post("/booking", zValidator('json', bookingSchema, (result, c) => {
@@ -25,9 +26,6 @@ bookingRouter.get('/api/bookings', (c) => {
   return c.json(bookings);
 });
 
-bookingRouter.post('/api/bookings', async (c) => {
-  const newBooking = await c.req.json();
-  bookings.push(newBooking); // Replace with actual database insertion logic
-  c.header('Content-Type', 'application/json');
-  return c.json({ message: 'Booking created successfully' });
-});
+
+
+

@@ -35,6 +35,7 @@ export const deleteBookingService = async (id: number): Promise<string> => {
 export const getMoreBookingInfoService = async (): Promise<any[]> => {
     return await db.query.BookingsTable.findMany({
         columns: {
+            
             vehicle_id: true,
             user_id: true,
             booking_date: true,
@@ -57,4 +58,21 @@ export const getMoreBookingInfoService = async (): Promise<any[]> => {
             },
         }
     }) as any[];
+}
+
+//get all bookings for one user using the id
+export const getUserBookingsService = async (user_id: number)=> {
+    return await db.query.BookingsTable.findMany({
+        where: eq(BookingsTable.user_id, user_id),
+        columns: {
+            id: true,
+            user_id: true,
+            vehicle_id: true,
+            booking_date: true,
+            return_date: true,
+            booking_status: true,
+            total_amount: true
+        },
+       
+    });
 }

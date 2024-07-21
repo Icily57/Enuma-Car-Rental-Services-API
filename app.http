@@ -69,17 +69,20 @@ Content-Type: application/json
 GET http://localhost:8000/api/booking
  
 ###
+GET http://localhost:8000/api/bookings-by-user/1
 
+###
 POST http://localhost:8000/api/booking
 Authorization: 
 Content-Type: application/json
 
 {
     "user_id": 1,
-    "vehicle_id": 2,
-    "location_id": 2,
-    "total_amount": 1500.00,
-    "booking_status": "approved"
+    "vehicle_id": 1,
+    "location_name": "Kutus",
+    "total_amount": 1600.00,
+    "booking_date": "2021-05-12",
+    "return_date": "2021-05-15"
 }
 
 
@@ -106,18 +109,19 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6
 ###
 
 GET http://localhost:8000/api/payment
-Authorization: 
+
 
 ###
-POST http://localhost:8000/api/payment
+POST http://localhost:8000/payment
 Authorization: 
 Content-Type: application/json
 
 {
-     "booking_id": 3,
+    "booking_id": 25,
+    "user_id":  1,
     "amount": 150.00,
     "payment_status": "pending",
-    "payment_method": "Mobile Money",
+    "payment_method": "Card",
     "transaction_id": "txn_157665564"
 }
 
@@ -146,6 +150,9 @@ DELETE http://localhost:8000/api/payment/2
 GET http://localhost:8000/api/customerSupportTickets
 
 ###
+GET http://localhost:8000/api/tickets-by-user/1
+
+###
 GET http://localhost:8000/api/customerSupportTickets/2
 
 ###
@@ -154,7 +161,7 @@ Content-Type: application/json
 
 {
 
-    "user_id": 2,
+    "user_id": 1,
     "subject": "Payment Issue",
     "description": "I made a payment but it was not processed. Please help me with this issue.",
     "status": "open"
@@ -254,8 +261,9 @@ POST http://localhost:8000/api/vehicle
 Content-Type: application/json
 
 {
-      "rental_rate": 99.99,
-    "availability": true
+      "rental_rate": 240.00,
+      "vehicleSpec_id": 8,
+      "availability": true
 }
 
 ###
@@ -271,6 +279,12 @@ Content-Type: application/json
 GET http://localhost:8000/api/vehicle/6
 
 ###
+GET http://localhost:8000/api/vehicleswithdetails
+
+###
+GET http://localhost:8000/api/vehicle-with-specs/1
+
+###
 DELETE http://localhost:8000/api/vehicle/6
 
 ###
@@ -283,14 +297,13 @@ POST http://localhost:8000/api/vehicleSpecs
 Content-Type: application/json
 
 {
-    "vehicle_id": 5,
     "manufacturer": "Toyota",
     "model": "Camry",
-    "year": 2022,
+    "year": "2022",
     "fuel_type": "Petrol",
     "engine_capacity": "2.5L",
     "transmission": "Automatic",
-    "seating_capacity": 5,
+    "seating_capacity": "5",
     "color": "Red",
     "features": "Air Conditioning, Power Steering, Bluetooth, Cruise Control"
 }

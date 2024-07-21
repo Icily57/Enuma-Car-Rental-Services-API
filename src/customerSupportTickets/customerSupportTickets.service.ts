@@ -55,6 +55,17 @@ export const getMoreCustomerSupportTicketInfoService = async (id: number) => {
       }
     },
   });
+}
 
-
+// get all tickets for one user using id
+export const getUserTicketsByUserIdService = async (id: number) => {
+  return await db.query.CustomerSupportTicketsTable.findMany({
+    where: eq(CustomerSupportTicketsTable.user_id, id),
+    columns:{
+      user_id:true,
+      subject:true,
+      description:true,
+      status:true
+    }
+    });
 }

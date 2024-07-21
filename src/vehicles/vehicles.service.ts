@@ -3,12 +3,7 @@ import db from "../drizzle/db";
 import { TIVehicle, TSVehicle, VehiclesTable } from "../drizzle/schema";
 
 export const vehicleService = async (limit?: number): Promise<TSVehicle[] | null> => {
-    if (limit) {
-        return await db.query.VehiclesTable.findMany({
-            limit: limit
-        });
-    }
-    return await db.query.VehiclesTable.findMany();
+     return await db.query.VehiclesTable.findMany();
 }
 
 export const getVehicleService = async (id: number): Promise<TIVehicle | undefined> => {
@@ -39,3 +34,48 @@ export const deleteVehicleService = async (id: number) => {
 //         MenuItem: MenuItemsTable.description
 //     }).from(VehiclesTable).rightJoin(MenuItemsTable, eq(VehiclesTable.id, MenuItemsTable.Vehicle_id))
 // }
+
+//get all vehicles with thier specs
+export const getMoreVehicleInfoService = async () => {
+    return await db.query.VehiclesTable.findMany({
+        with: {
+            vehicleSpecs: {
+                columns: {
+                    id: true,
+                    manufacturer: true,
+                    model: true,
+                    year: true,
+                    color: true,                    
+                    fuel_type: true,
+                    transmission: true,
+                    engine_capacity: true,
+                    seating_capacity: true,
+                    features: true,
+                }
+            }
+        }
+    })
+}
+
+//get one vehicle with its specs and return as an object
+export const getVehicleInfoService = async (id: number) => {
+    return await db.query.VehiclesTable.findFirst({
+        where: eq(VehiclesTable.id, id),
+        with: {
+            vehicleSpecs: {
+                columns: {
+                    id: true,
+                    manufacturer: true,
+                    model: true,
+                    year: true,
+                    color: true,
+                    fuel_type: true,
+                    transmission: true,
+                    engine_capacity: true,
+                    seating_capacity: true,
+                    features: true,
+                }
+            }
+        }
+    })
+}
