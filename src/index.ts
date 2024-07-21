@@ -19,6 +19,7 @@ import { vehicleSpecRouter } from './vehicle Specifications/vehicleSpec.router'
 import { paymentRouter } from './payments/payment.router'
 import { locationBranchRouter } from './location and Branches/locationBranches.router'
 import {cors} from 'hono/cors'
+import handleStripeWebhook from './payments/payment.controller'
 
 const app = new Hono()
 
@@ -28,7 +29,7 @@ const customTimeoutException = () =>
   })
 
 const { printMetrics, registerMetrics } = prometheus()
-
+app.post('/webhook', handleStripeWebhook)
 app.use('*', registerMetrics)
 app.get('/metrics', printMetrics)
 app.use(cors())

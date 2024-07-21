@@ -50,3 +50,8 @@ export const getMorePaymentInfoService = async () => {
     },
   });
 };
+
+export const UpdateCheckoutPaymentService = async (session_id:string) => {
+  await db.update(PaymentsTable).set({payment_status:"paid"}).where(eq(PaymentsTable.transaction_id, session_id));
+  return "payment updated successfully";
+}

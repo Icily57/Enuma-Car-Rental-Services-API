@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { paymentService, getPaymentService, createPaymentService, updatePaymentService, deletePaymentService, getMorePaymentInfoService } from "./payment.service";
+import { paymentService, getPaymentService, createPaymentService, updatePaymentService, deletePaymentService, getMorePaymentInfoService, UpdateCheckoutPaymentService } from "./payment.service";
 import dotenv from "dotenv";
 import Stripe from "stripe";
 dotenv.config();
@@ -149,3 +149,34 @@ export const checkoutPayment = async(c:Context) => {
         
     }   
 }
+
+export const handleStripeWebhook = async (c: Context) => {
+        const sig = c.req.header('stripe-signature')
+        const rawBody = await c.req.text();
+        if (!sig) return c.text('No stripe signature', 400);
+
+        let event: Stripe.Event;
+        try {
+            event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET as string);
+        } catch (error) {
+            return c.text('Invalid stripe signature', 400);
+        }
+
+        // Handle the event
+        switch (event.type) {
+            case 'checkout.session.completed':
+                const session = event.data.object as Stripe.Checkout.Session;
+                //update payment status
+                try {
+                  const session_id = session.id;
+                  const res = await UpdateCheckoutPaymentService(session_id);  
+                  return c.json({ res }, 201);
+                } catch (error) {
+                    return c.json({ error: error }, 400)
+                }
+
+                default:
+                    return c.json({ 'status': 'not_handled' }, 200);
+            }
+}
+export default handleStripeWebhook
