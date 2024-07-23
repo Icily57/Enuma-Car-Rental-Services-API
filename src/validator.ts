@@ -26,6 +26,7 @@ export const vehicleSpecSchema = z.object({
     seating_capacity: z.string(), 
     color: z.string(),
     features: z.string(),
+    imageUrl: z.string()
 })
 
 export const bookingSchema = z.object({
@@ -76,6 +77,5 @@ export const registerUserSchema = z.object({
     email: z.string(),
     contact_phone: z.string(),
     address: z.string(),
-    role: z.string(),
     password: z.string()
 })

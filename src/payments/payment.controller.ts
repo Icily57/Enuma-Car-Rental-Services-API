@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { paymentService, getPaymentService, createPaymentService, updatePaymentService, deletePaymentService, getMorePaymentInfoService, UpdateCheckoutPaymentService } from "./payment.service";
+import { paymentService, getPaymentService, createPaymentService, updatePaymentService, deletePaymentService, getMorePaymentInfoService, UpdateCheckoutPaymentService, getPaymentsByUserIdService } from "./payment.service";
 import dotenv from "dotenv";
 import Stripe from "stripe";
 dotenv.config();
@@ -82,13 +82,17 @@ export const deletePayment = async (c: Context) => {
     }
 }
 
+//get payments by user id
+export const getPaymentsByUserId = async (c: Context) => {
+    const user_id = parseInt(c.req.param("user_id"));
+    if (isNaN(user_id)) return c.text("Invalid ID", 400);
 
-// export const listActivepayments = async (c: Context) => {
-//     const data = await getActivepaymentsService();
-//     if (!data) return c.text("No active payment items found", 404);
-
-//     return c.json(data, 200);
-// };
+    const payments = await getPaymentsByUserIdService(user_id);
+    if (payments == null) {
+        return c.text("payment not found", 404);
+    }
+    return c.json(payments, 200);
+}
 
 export const getMorePaymentInfo = async(c:Context) => {
     const paymentInfo = await getMorePaymentInfoService();

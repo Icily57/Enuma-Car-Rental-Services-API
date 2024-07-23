@@ -18,15 +18,13 @@ GET http://localhost:8000/api/users/1
 ###
 
 POST http://localhost:8000/api/users
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6Ik1pa2kgTW91c2UiLCJlbWFpbCI6Im1pa2lAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IFN3ZWV0IFN0cmVldCIsInJvbGUiOiJ1c2VyIn1dLCJyb2xlIjpbeyJmdWxsX25hbWUiOiJNaWtpIE1vdXNlIiwiZW1haWwiOiJtaWtpQGV4YW1wbGUuY29tIiwiYWRkcmVzcyI6IjQ1NiBTd2VldCBTdHJlZXQiLCJyb2xlIjoidXNlciJ9XSwiZXhwIjoxNzIwNzA3ODgzfQ.mB29CmgnzAKFLGH-GL16Y6MkZS0Rn4h5AIOw82iKnY0
 Content-Type: application/json
 
 {
     "full_name": "Margaret Smith",
     "email": "maggy@example.com",
     "contact_phone": "+0909468321",
-    "address": "465 Sweet Street",
-    "role": "user"
+    "address": "465 Sweet Street"
 }
 
 ###
@@ -43,25 +41,25 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6
 
 ###
 
-POST http://localhost:8000/api/auth/register
+POST http://localhost:8000/auth/register
 Content-Type: application/json
 
 {
-    "email":"mikikim@gmail.com",
+    "email":"kim@gmail.com",
     "full_name":"Miki Kim",
-    "contact_phone":"+1234347350",
-    "address":"246 Sweet St",
-    "role":"user",
-    "password": "67890"
+    "contact_phone":"+1234364200",
+    "address":"246 Main St",
+    "password": "22222"
+
 }
 
 ###
-POST http://localhost:8000/api/auth/login
+POST http://localhost:8000/auth/login
 Content-Type: application/json
 
 {
-    "email":"icilyweird@gmail.com",
-    "password": "12345"
+    "email":"kaila@gmail.com",
+    "password": "55555"
 }
 
 
@@ -72,7 +70,7 @@ GET http://localhost:8000/api/booking
 GET http://localhost:8000/api/bookings-by-user/1
 
 ###
-POST http://localhost:8000/api/booking
+POST http://localhost:8000/booking
 Authorization: 
 Content-Type: application/json
 
@@ -85,6 +83,14 @@ Content-Type: application/json
     "return_date": "2021-05-15"
 }
 
+
+###
+PUT  https://enuma-car-rental-services-api.onrender.com/booking/approve/32
+Content-Type: application/json
+
+{
+    "booking_status": "approved"
+}
 
 ###
 POST http://localhost:8000/api/bookings
@@ -109,6 +115,9 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6
 ###
 
 GET http://localhost:8000/api/payment
+
+###
+GET http://localhost:8000/payments/2
 
 
 ###
@@ -147,21 +156,21 @@ Authorization:
 DELETE http://localhost:8000/api/payment/2
 
 ###
-GET http://localhost:8000/api/customerSupportTickets
+GET http://localhost:8000/Tickets
 
 ###
-GET http://localhost:8000/api/tickets-by-user/1
+GET http://localhost:8000/tickets-by-user/2
 
 ###
-GET http://localhost:8000/api/customerSupportTickets/2
+GET http://localhost:8000/Tickets/2
 
 ###
-POST http://localhost:8000/api/customerSupportTickets
+POST http://localhost:8000/Tickets
 Content-Type: application/json
 
 {
 
-    "user_id": 1,
+    "user_id": 2,
     "subject": "Payment Issue",
     "description": "I made a payment but it was not processed. Please help me with this issue.",
     "status": "open"
@@ -169,14 +178,14 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8000/api/customerSupportTickets/1
+PUT http://localhost:8000/Tickets/1
 Content-Type: application/json
 
 {
     "status": "in progress"
 }
 ###
-DELETE http://localhost:8000/api/customerSupportTickets/2
+DELETE http://localhost:8000/Tickets/2
 
 ###
 
@@ -257,13 +266,12 @@ GET http://localhost:8000/api/vehicle/1
 
 ###
 
-POST http://localhost:8000/api/vehicle
+POST http://localhost:8000/vehicle
 Content-Type: application/json
 
 {
-      "rental_rate": 240.00,
-      "vehicleSpec_id": 8,
-      "availability": true
+      "rental_rate": 2900.00,
+      "vehicleSpec_id": 13
 }
 
 ###
@@ -324,69 +332,6 @@ GET http://localhost:8000/api/vehicleSpecs/6
 DELETE http://localhost:8000/api/vehicleSpecs/6
 
 ###
-
-GET http://localhost:8000/api/payment
-
-###
-
-POST http://localhost:8000/api/payment
-Content-Type: application/json
-
-{
-      "booking_id": 1,
-    "amount": 150.75,
-    "payment_status": "Completed",
-    "payment_method": "Credit Card",
-    "transaction_id": "txn_01ABC23DEFG45H"
-}
-
-###
-
-PUT http://localhost:8000/api/payment/2
-Content-Type: application/json
-
-{
-    "amount": 160.75
-}
-###
-
-GET http://localhost:8000/api/payment/2
-
-###
-DELETE http://localhost:8000/api/payment/2
-
-###
-
-
-GET http://localhost:8000/api/locationBranch
-
-###
-
-POST http://localhost:8000/api/locationBranch
-Content-Type: application/json
-
-{
-     "name": "John Doe",
-    "address": "123 Main St, Springfield, IL",
-    "contact_phone": "+1-555-123-4567"
-}
-
-###
-
-PUT http://localhost:8000/api/locationBranch/2
-Content-Type: application/json
-
-{
-    "name": "Guga"
-}
-
-###
-
-GET http://localhost:8000/api/locationBranch/2
-
-###
-DELETE http://localhost:8000/api/locationBranch/2
-
 
 
 

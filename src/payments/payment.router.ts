@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { listPayment, getPayment, createPayment, updatePayment, deletePayment, getMorePaymentInfo, checkoutPayment} from "./payment.controller"
+import { listPayment, getPayment, createPayment, updatePayment, deletePayment, getMorePaymentInfo, checkoutPayment, getPaymentsByUserId} from "./payment.controller"
 import { zValidator } from "@hono/zod-validator";
 import { paymentsSchema } from "../validator";
 import { adminRoleAuth,bothRoleAuth } from '../Middleware/bearAuth'
@@ -20,3 +20,6 @@ paymentRouter.get("/PaymentInfo", getMorePaymentInfo)
 
 //checkoutpayment
 paymentRouter.post("/checkout-session",checkoutPayment)
+
+//get payments by user id
+paymentRouter.get("/payments/:user_id", getPaymentsByUserId)

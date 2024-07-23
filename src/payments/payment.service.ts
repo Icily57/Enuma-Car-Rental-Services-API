@@ -51,6 +51,13 @@ export const getMorePaymentInfoService = async () => {
   });
 };
 
+//get payments by user id
+export const getPaymentsByUserIdService = async (user_id:number) => {
+  return await db.query.PaymentsTable.findMany({
+    where: eq(PaymentsTable.user_id, user_id),
+  });
+};
+
 export const UpdateCheckoutPaymentService = async (session_id:string) => {
   await db.update(PaymentsTable).set({payment_status:"paid"}).where(eq(PaymentsTable.transaction_id, session_id));
   return "payment updated successfully";

@@ -76,3 +76,9 @@ export const getUserBookingsService = async (user_id: number)=> {
        
     });
 }
+
+//approve booking using the id
+export const approveBookingService = async (id: number): Promise<string> => {
+    await db.update(BookingsTable).set({ booking_status: "Approved" }).where(eq(BookingsTable.id, id));
+    return "Booking approved successfully";
+}

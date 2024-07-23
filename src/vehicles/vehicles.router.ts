@@ -10,11 +10,7 @@ vehicleRouter.get("/vehicle", listVehicles);
 //get a single vehicle    api/vehicles/1
 vehicleRouter.get("/vehicle/:id", getVehicle)
 // create a vehicle 
-vehicleRouter.post("/vehicle", zValidator('json', vehicleSchema, (result, c) => {
-    if (!result.success) {
-        return c.json(result.error, 400)
-    }
-}), createVehicle)
+vehicleRouter.post("/vehicle", createVehicle)
 //update a vehicle
 vehicleRouter.put("/vehicle/:id",updateVehicle)
 

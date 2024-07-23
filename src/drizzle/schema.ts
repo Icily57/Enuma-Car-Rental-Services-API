@@ -40,7 +40,8 @@ export const  VehicleSpecificationsTable = pgTable("vehicleSpec", {
     transmission: varchar('transmission', {length: 50}), 
     seating_capacity: varchar('seating_capacity'), 
     color: varchar('color', {length: 50}), 
-    features: text('features')
+    features: text('features'),
+    imageUrl: varchar('imageUrl'),
 })
 
 export const  BookingsTable = pgTable("booking", {

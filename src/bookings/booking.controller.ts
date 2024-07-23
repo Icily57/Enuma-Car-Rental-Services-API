@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { bookingService, getBookingService, createBookingService, updateBookingService, deleteBookingService, getMoreBookingInfoService, getUserBookingsService } from "./booking.service";
+import { bookingService, getBookingService, createBookingService, updateBookingService, deleteBookingService, getMoreBookingInfoService, getUserBookingsService, approveBookingService } from "./booking.service";
 import { TIBooking, TSBooking } from "../drizzle/schema";
 
 export const listBooking = async (c: Context) => {
@@ -88,5 +88,23 @@ export const getAllBookingsByUserId = async (c: Context) => {
     } catch (error: any) {
         return c.json({ error: error?.message }, 400);
         
+    }
+}
+
+
+//Approve booking using the booking id
+export const approveBooking = async (c: Context) => {
+    const id = parseInt(c.req.param("id"));
+    if (isNaN(id)) return c.text("Invalid ID", 400);
+
+    const booking: TIBooking = await c.req.json();
+    try {
+        const searchedBooking = await approveBookingService(id);
+        if (searchedBooking == undefined) return c.text("Booking not found", 404);
+        const res = await updateBookingService(id, booking);
+        if (!res) return c.text("Booking not updated", 404);
+        return c.json({ msg: res }, 201);
+    } catch (error: any) {
+        return c.json({ error: error?.message }, 400);
     }
 }

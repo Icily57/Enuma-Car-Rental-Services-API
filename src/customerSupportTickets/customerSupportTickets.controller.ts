@@ -96,7 +96,7 @@ export const getUserTicketsByUserId = async (c: Context) => {
     if (isNaN(id)) return c.text("Invalid ID", 400);
 
     const tickets = await getUserTicketsByUserIdService(id);
-    if (tickets == undefined) {
+    if (!tickets) {
         return c.text("Tickets not found", 404);
     }
     return c.json(tickets, 200);
