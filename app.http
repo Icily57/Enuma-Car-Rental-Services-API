@@ -1,5 +1,5 @@
 
-GET http://localhost:8000/api/ok/
+GET http://localhost:8000/ok/
 
 
 # ###
@@ -10,14 +10,14 @@ GET http://localhost:8000/api/ok/
 # GET http://localhost:8000/api/users?limit=4
 
 ###
-GET http://localhost:8000/api/users
+GET http://localhost:8000/users
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sInJvbGUiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sImV4cCI6MTcyMDczNDA2M30.lSxikb-PMiUOHQNcMrACvX5IpUdCtBUj1OgrWA_nNTo
 
 ###
-GET http://localhost:8000/api/users/1
+GET http://localhost:8000/users/1
 ###
 
-POST http://localhost:8000/api/users
+POST http://localhost:8000/users
 Content-Type: application/json
 
 {
@@ -28,7 +28,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8000/api/users/1
+PUT http://localhost:8000/users/1
 Authorization: 
 Content-Type: application/json
 
@@ -36,7 +36,7 @@ Content-Type: application/json
     "full_name": "Jane Smith"
 }
 ###
-DELETE http://localhost:8000/api/users/2
+DELETE http://localhost:8000/users/2
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sInJvbGUiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sImV4cCI6MTcyMDcwODA5Nn0.xdbc_JEwRHun-clP98vh0sjIn03bR75TncNKCK-iaNQ
 
 ###
@@ -64,7 +64,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:8000/api/booking
+GET http://localhost:8000/booking
  
 ###
 GET http://localhost:8000/bookings-by-user/2
@@ -93,10 +93,10 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8000/api/bookings
+POST http://localhost:8000/bookings
 
 ###
-PUT http://localhost:8000/api/booking/2
+PUT http://localhost:8000/booking/2
 Authorization:
 Content-Type: application/json
 
@@ -104,17 +104,17 @@ Content-Type: application/json
     "booking_status": "completed"
 }
 
-GET http://localhost:8000/api/booking/2
+GET http://localhost:8000/booking/2
 Authorization: 
 
 ###
-DELETE http://localhost:8000/api/booking/2
+DELETE http://localhost:8000/booking/2
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sInJvbGUiOlt7ImZ1bGxfbmFtZSI6IkphbmUgU21pdGgiLCJlbWFpbCI6ImphbmVzbWl0aEFAZXhhbXBsZS5jb20iLCJhZGRyZXNzIjoiNDU2IE9hayBTdHJlZXQiLCJyb2xlIjoiYWRtaW4ifV0sImV4cCI6MTcyMDcwODA5Nn0.xdbc_JEwRHun-clP98vh0sjIn03bR75TncNKCK-iaNQ
 
 
 ###
 
-GET http://localhost:8000/api/payment
+GET http://localhost:8000/payment
 
 ###
 GET http://localhost:8000/payments/2
@@ -138,7 +138,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8000/api/payment/2
+PUT http://localhost:8000/payment/2
 Authorization: 
 Content-Type: application/json
 
@@ -149,20 +149,20 @@ Content-Type: application/json
 
 
 
-GET http://localhost:8000/api/payment/2
+GET http://localhost:8000/payment/2
 Authorization: 
 
 ###
-DELETE http://localhost:8000/api/payment/2
+DELETE http://localhost:8000/payment/2
 
 ###
-GET http://localhost:8000/Tickets
+GET http://localhost:8000/customerSupportTickets
 
 ###
 GET http://localhost:8000/tickets-by-user/2
 
 ###
-GET http://localhost:8000/Tickets/2
+GET http://localhost:8000/customerSupportTickets/2
 
 ###
 POST http://localhost:8000/customerSupportTickets
@@ -177,26 +177,26 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8000/Tickets/1
+PUT http://localhost:8000/customerSupportTickets/1
 Content-Type: application/json
 
 {
     "status": "in progress"
 }
 ###
-DELETE http://localhost:8000/Tickets/2
+DELETE http://localhost:8000/customerSupportTickets/2
 
 ###
 
 
-GET http://localhost:8000/api/locationBranch
+GET http://localhost:8000/locationBranch
 
 ###
-GET http://localhost:8000/api/locationBranch/1
+GET http://localhost:8000/locationBranch/1
 
 ###
 
-POST http://localhost:8000/api/locationBranch
+POST http://localhost:8000/locationBranch
 Content-Type: application/json
 
 {
@@ -207,22 +207,22 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8000/api/locationBranch/6
+PUT http://localhost:8000/locationBranch/6
 Content-Type: application/json
 
 {
     "name": "Bistro"
 }
 ###
-DELETE http://localhost:8000/api/locationBranch/6
+DELETE http://localhost:8000/locationBranch/6
 
 ###
 
-GET http://localhost:8000/api/fleet
+GET http://localhost:8000/fleet
 
 ###
 
-POST http://localhost:8000/api/fleet
+POST http://localhost:8000/fleet
 Content-Type: application/json
 
 {
@@ -236,24 +236,24 @@ Content-Type: application/json
 ###
 
 
-GET http://localhost:8000/api/fleet/2
+GET http://localhost:8000/fleet/2
 ###
 
 # GET http://localhost:8000/api/filterFleetInfo/1
 ###
 
-GET http://localhost:8000/api/fleetInfo
+GET http://localhost:8000/fleetInfo
 ###
 
 
-PUT http://localhost:8000/api/fleet/3
+PUT http://localhost:8000/fleet/3
 Content-Type: application/json
 
 {
     "depreciation_rate": 0.12
 }
 ###
-DELETE http://localhost:8000/api/fleet/3
+DELETE http://localhost:8000/fleet/3
 
 
 ###
@@ -261,7 +261,7 @@ DELETE http://localhost:8000/api/fleet/3
 GET http://localhost:8000/vehicle
 
 ###
-GET http://localhost:8000/api/vehicle/1
+GET http://localhost:8000/vehicle/1
 
 ###
 
@@ -296,11 +296,11 @@ DELETE http://localhost:8000/vehicle/6
 
 ###
 
-GET http://localhost:8000/api/vehicleSpecs
+GET http://localhost:8000/vehicleSpecs
 
 ###
 
-POST http://localhost:8000/api/vehicleSpecs
+POST http://localhost:8000/vehicleSpecs
 Content-Type: application/json
 
 {
@@ -317,7 +317,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8000/api/vehicleSpecs/6
+PUT http://localhost:8000/vehicleSpecs/6
 Content-Type: application/json
 
 {
@@ -325,10 +325,10 @@ Content-Type: application/json
 }
 ###
 
-GET http://localhost:8000/api/vehicleSpecs/6
+GET http://localhost:8000/vehicleSpecs/6
 
 ###
-DELETE http://localhost:8000/api/vehicleSpecs/6
+DELETE http://localhost:8000/vehicleSpecs/6
 
 ###
 
