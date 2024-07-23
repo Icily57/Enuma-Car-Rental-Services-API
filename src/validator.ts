@@ -49,8 +49,7 @@ export const paymentsSchema = z.object({
 export const customerSupportTicketSchema = z.object({
     user_id: z.number(),
     subject: z.string(),
-    description: z.string(),
-    status: z.string()
+    description: z.string()
 })
 
 export const locationSchema = z.object({

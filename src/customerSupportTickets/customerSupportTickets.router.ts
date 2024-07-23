@@ -10,11 +10,7 @@ customerSupportTicketRouter.get("/customerSupportTickets", listCustomerSupportTi
 //get a single CustomerSupportTicket     api/CustomerSupportTicket /1
 customerSupportTicketRouter.get("/customerSupportTickets/:id", getCustomerSupportTicket )
 // create a CustomerSupportTicket  
-customerSupportTicketRouter.post("/customerSupportTickets",zValidator('json', customerSupportTicketSchema, (result, c) => {
-    if (!result.success) {
-        return c.json(result.error, 400)
-    }
-}), createCustomerSupportTicket )
+customerSupportTicketRouter.post("/customerSupportTickets", createCustomerSupportTicket )
 //update a CustomerSupportTicket 
 customerSupportTicketRouter.put("/customerSupportTickets/:id",updateCustomerSupportTicket )
 

@@ -165,15 +165,14 @@ GET http://localhost:8000/tickets-by-user/2
 GET http://localhost:8000/Tickets/2
 
 ###
-POST http://localhost:8000/Tickets
+POST http://localhost:8000/customerSupportTickets
 Content-Type: application/json
 
 {
 
     "user_id": 2,
     "subject": "Payment Issue",
-    "description": "I made a payment but it was not processed. Please help me with this issue.",
-    "status": "open"
+    "description": "I made a payment but it was not processed. Please help me with this issue."
 }
 
 ###
