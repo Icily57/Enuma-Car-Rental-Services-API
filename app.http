@@ -258,7 +258,7 @@ DELETE http://localhost:8000/api/fleet/3
 
 ###
 
-GET http://localhost:8000/api/vehicle
+GET http://localhost:8000/vehicle
 
 ###
 GET http://localhost:8000/api/vehicle/1
@@ -275,7 +275,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8000/api/vehicle/6
+PUT http://localhost:8000/vehicle/6
 Content-Type: application/json
 
 {
@@ -283,16 +283,16 @@ Content-Type: application/json
 }
 ###
 
-GET http://localhost:8000/api/vehicle/6
+GET http://localhost:8000/vehicle/6
 
 ###
-GET http://localhost:8000/api/vehicleswithdetails
+GET http://localhost:8000/vehicleswithdetails
 
 ###
-GET http://localhost:8000/api/vehicle-with-specs/1
+GET http://localhost:8000/vehicle-with-specs/1
 
 ###
-DELETE http://localhost:8000/api/vehicle/6
+DELETE http://localhost:8000/vehicle/6
 
 ###
 
