@@ -67,7 +67,7 @@ Content-Type: application/json
 GET http://localhost:8000/api/booking
  
 ###
-GET http://localhost:8000/api/bookings-by-user/1
+GET http://localhost:8000/bookings-by-user/2
 
 ###
 POST http://localhost:8000/booking
@@ -270,8 +270,8 @@ POST http://localhost:8000/vehicle
 Content-Type: application/json
 
 {
-      "rental_rate": 2900.00,
-      "vehicleSpec_id": 13
+      "rental_rate": 2900,
+      "vehicleSpec_id": 17
 }
 
 ###
