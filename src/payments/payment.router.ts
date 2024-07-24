@@ -22,4 +22,4 @@ paymentRouter.get("/PaymentInfo", getMorePaymentInfo)
 paymentRouter.post("/checkout-session",checkoutPayment)
 
 //get payments by user id
-paymentRouter.get("/payments/:user_id", getPaymentsByUserId)
+paymentRouter.get("/payment/:user_id", getPaymentsByUserId)

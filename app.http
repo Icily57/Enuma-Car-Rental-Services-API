@@ -119,6 +119,9 @@ GET http://localhost:8000/payment
 ###
 GET http://localhost:8000/payments/2
 
+###
+GET http://localhost:8000/payments/13
+
 
 ###
 POST http://localhost:8000/payment
