@@ -130,8 +130,8 @@ export const checkoutPayment = async(c:Context) => {
                 payment_method_types: ['card'],
                 line_items,
                 mode: 'payment',
-                success_url: `${CLIENT_URL}/dashboard`,
-                cancel_url: `${CLIENT_URL}/dashboard`,
+                success_url: `${CLIENT_URL}/dashboard/payments`,
+                cancel_url: `${CLIENT_URL}/dashboard/bookings`,
             });
 
             const paymentDetails = {
